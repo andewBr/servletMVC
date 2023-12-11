@@ -23,7 +23,7 @@ mvn exec:java -Dexec.mainClass="org.example.Main"
 ##  :bust_in_silhouette: запуск Swagger/OpenAPI
 documentation: [swagger-codegen](https://github.com/swagger-api/swagger-codegen)
 
-## step1:
+## step:
 ```bash
 swagger-codegen generate -i openapi.yaml -l java -o output-directory
 ```
