@@ -7,29 +7,26 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Transactional
-public class FileRepository {
+public class FileRepository implements TemplateRepository<File> {
 
-    public File createFile(File file) {
-        HibernateTemplate.performDatabaseOperation(session -> {
-            session.save(file);
-            return null;
-        });
-        return file;
+    public File create(File file) {
+        return (File) HibernateTemplate.performDatabaseOperation(session -> session.merge(file));
     }
 
-    public File readFile(Integer fileId) {
+    public File read(Integer fileId) {
         return HibernateTemplate.performDatabaseOperation(session ->
                 session.get(File.class, fileId)
         );
     }
 
-    public List<File> readAllFiles() {
+    public List<File> readAll() {
         return HibernateTemplate.performDatabaseOperation(session ->
                 session.createQuery("FROM File", File.class).list()
         );
     }
 
-    public File updateFile(Integer fileId, File updatedFile) {
+    @Override
+    public File update(int fileId, File updatedFile) {
         return HibernateTemplate.performDatabaseOperation(session -> {
             File existingFile = session.get(File.class, fileId);
             if (existingFile != null) {
@@ -41,13 +38,14 @@ public class FileRepository {
         });
     }
 
-    public void deleteFile(Integer fileId) {
-        HibernateTemplate.performDatabaseOperation(session -> {
+    public File delete(Integer fileId) {
+        return HibernateTemplate.performDatabaseOperation(session -> {
             File file = session.get(File.class, fileId);
             if (file != null) {
                 session.delete(file);
             }
-            return null;
+            return file;
         });
     }
+
 }

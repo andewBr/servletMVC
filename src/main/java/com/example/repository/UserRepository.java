@@ -7,29 +7,26 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Transactional
-public class UserRepository {
+public class UserRepository implements TemplateRepository<User> {
 
-    public User createUser(User user) {
-        HibernateTemplate.performDatabaseOperation(session -> {
-            session.save(user);
-            return null;
-        });
-        return user;
+    public User create(User user) {
+        return (User) HibernateTemplate.performDatabaseOperation(session -> session.merge(user));
     }
 
-    public User readUser(Integer userId) {
+    public User read(Integer userId) {
         return HibernateTemplate.performDatabaseOperation(session ->
                 session.get(User.class, userId)
         );
     }
 
-    public List<User> readAllUsers() {
+    public List<User> readAll() {
         return HibernateTemplate.performDatabaseOperation(session ->
                 session.createQuery("FROM User", User.class).list()
         );
     }
 
-    public User updateUser(Integer userId, User updatedUser) {
+    @Override
+    public User update(int userId, User updatedUser) {
         return HibernateTemplate.performDatabaseOperation(session -> {
             User existingUser = session.get(User.class, userId);
             if (existingUser != null) {
@@ -41,7 +38,7 @@ public class UserRepository {
         });
     }
 
-    public User deleteUser(Integer userId) {
+    public User delete(Integer userId) {
         return HibernateTemplate.performDatabaseOperation(session -> {
             User user = session.get(User.class, userId);
             if (user != null) {

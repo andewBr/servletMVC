@@ -1,7 +1,6 @@
 package com.example.service;
 
 import com.example.model.Event;
-import com.example.model.User;
 import com.example.repository.EventRepository;
 
 import java.util.List;
@@ -16,26 +15,26 @@ public class EventService  implements TemplateService<Event> {
 
     @Override
     public Event createEntity(Event event) {
-        return eventRepository.createEvent(event);
+        return eventRepository.create(event);
     }
 
     @Override
     public Event readEntity(Integer eventId) {
-        return eventRepository.readEvent(eventId);
+        return eventRepository.read(eventId);
     }
 
     @Override
     public List<Event> readAllEntity() {
-        return eventRepository.readAllEvents();
+        return eventRepository.readAll();
     }
 
     @Override
     public Event updateEntity(int eventId, Event event) {
-        return eventRepository.updateEvent(eventId, event);
+        return eventRepository.update(eventId, event);
     }
 
     @Override
     public Event deleteEntity(Integer entityId) {
-        return eventRepository.deleteEvent(entityId);
+        return eventRepository.delete(entityId);
     }
 }

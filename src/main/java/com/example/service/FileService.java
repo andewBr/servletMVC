@@ -1,6 +1,5 @@
 package com.example.service;
 
-import com.example.model.Event;
 import com.example.model.File;
 import com.example.repository.FileRepository;
 
@@ -10,25 +9,28 @@ public class FileService implements TemplateService<File> {
 
     private FileRepository fileRepository;
 
+    public FileService() {
+        this.fileRepository = new FileRepository();
+    }
 
     @Override
     public File createEntity(File file) {
-        return fileRepository.createFile(file);
+        return fileRepository.create(file);
     }
 
     @Override
     public File readEntity(Integer entityId) {
-        return fileRepository.readFile(entityId);
+        return fileRepository.read(entityId);
     }
 
     @Override
     public List<File> readAllEntity() {
-        return fileRepository.readAllFiles();
+        return fileRepository.readAll();
     }
 
     @Override
     public File updateEntity(int fileId, File file) {
-        return fileRepository.updateFile(fileId, file);
+        return fileRepository.update(fileId, file);
     }
 
     @Override

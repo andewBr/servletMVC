@@ -15,27 +15,27 @@ public class UserService implements TemplateService<User> {
 
     @Override
     public User createEntity(User user) {
-        return userRepository.createUser(user);
+        return userRepository.create(user);
     }
 
     @Override
     public User readEntity(Integer userId) {
-        return userRepository.readUser(userId);
+        return userRepository.read(userId);
     }
 
     @Override
     public List<User> readAllEntity() {
-        return userRepository.readAllUsers();
+        return userRepository.readAll();
     }
 
     @Override
     public User updateEntity(int userId, User updatedUser) {
-        return userRepository.updateUser(userId, updatedUser);
+        return userRepository.update(userId, updatedUser);
     }
 
     @Override
     public User deleteEntity(Integer userId) {
-        return userRepository.deleteUser(userId);
+        return userRepository.delete(userId);
     }
 }
 
