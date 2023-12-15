@@ -21,9 +21,9 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
 
 
-        <mapping class="com.example.model.User"/>
-        <mapping class="com.example.model.Event"/>
-        <mapping class="com.example.model.File"/>
+        <mapping class="it.project.model.User"/>
+        <mapping class="it.project.model.Event"/>
+        <mapping class="it.project.model.FileModel"/>
 
     </session-factory>
 </hibernate-configuration>
